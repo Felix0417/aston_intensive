@@ -2,8 +2,25 @@ package org.aston_intensive;
 
 import java.util.Comparator;
 
+/**
+ * Implementation class of the Quicksort algorithm
+ *
+ * @author felix
+ * @version 0.1
+ * @since 2023-10-31
+ */
 public class MyQuickSorter {
 
+    /**
+     * @param array the array to be sorted
+     * @param c     the comparator that can comparing the objects
+     * @param low   the lowest element of array
+     * @param high  the highest element of array
+     * @param <E>   the comparator to determine the order of the array. A null value indicates that the elements' natural ordering should be used.
+     * @throws ClassCastException             - if the array contains elements that are not mutually comparable using the specified comparator.
+     * @throws IllegalArgumentException       - if fromIndex > toIndex or (optional) if the comparator is found to violate the Comparator contract
+     * @throws ArrayIndexOutOfBoundsException - if fromIndex < 0 or toIndex > a.length
+     */
     public static <E> void sort(Object[] array, Comparator<? super E> c, int low, int high) {
         quickSort(array, c, low, high);
     }
