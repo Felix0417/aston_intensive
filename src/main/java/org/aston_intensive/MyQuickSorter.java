@@ -16,6 +16,7 @@ public class MyQuickSorter {
         }
     }
 
+    @SuppressWarnings({"unchecked"})
     private static <E> int partition(Object[] array, Comparator<? super E> c, int low, int high) {
         E pivot = (E) array[high];
         int i = low - 1;

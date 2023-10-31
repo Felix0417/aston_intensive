@@ -1,8 +1,10 @@
 package org.aston_intensive;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Objects;
 
-public class MyList<E> extends AbstractList<E> {
+public class MyList<E> {
 
     private static final Object[] DEFAULT_CAPACITY_EMPTY_ELEMENT_DATA = new Object[0];
 
@@ -11,10 +13,10 @@ public class MyList<E> extends AbstractList<E> {
     private int size;
 
     public MyList(int capacity) {
-        if (capacity > 0){
+        if (capacity > 0) {
             this.elementData = new Object[capacity];
-        }else {
-            if (capacity != 0){
+        } else {
+            if (capacity != 0) {
                 throw new IllegalArgumentException("Illegal Capacity: " + capacity);
             }
             this.elementData = DEFAULT_CAPACITY_EMPTY_ELEMENT_DATA;
@@ -25,9 +27,8 @@ public class MyList<E> extends AbstractList<E> {
         this.elementData = DEFAULT_CAPACITY_EMPTY_ELEMENT_DATA;
     }
 
-    @Override
     public boolean add(E e) {
-        if (size == this.elementData.length){
+        if (size == this.elementData.length) {
             this.elementData = this.grow();
         }
         this.elementData[size] = e;
@@ -35,7 +36,6 @@ public class MyList<E> extends AbstractList<E> {
         return true;
     }
 
-    @Override
     public void add(int index, E element) {
         checkIndex(index);
         int s;
@@ -48,18 +48,16 @@ public class MyList<E> extends AbstractList<E> {
         this.size++;
     }
 
-    @Override
     public E get(int index) {
         Objects.checkIndex(index, this.size);
         return this.elementData(index);
     }
 
     @SuppressWarnings({"unchecked"})
-    E elementData(int index) {
+    private E elementData(int index) {
         return (E) this.elementData[index];
     }
 
-    @Override
     @SuppressWarnings({"unchecked"})
     public E remove(int index) {
         Objects.checkIndex(index, this.size);
@@ -70,7 +68,6 @@ public class MyList<E> extends AbstractList<E> {
     }
 
     private void fastRemove(Object[] es, int i) {
-        ++this.modCount;
         int newSize;
         if ((newSize = this.size - 1) > i) {
             System.arraycopy(es, i + 1, es, i, newSize - i);
@@ -79,17 +76,15 @@ public class MyList<E> extends AbstractList<E> {
         es[this.size = newSize] = null;
     }
 
-    @Override
     public void clear() {
         Object[] es = this.elementData;
         int to = this.size;
 
-        for(int i = this.size = 0; i < to; ++i) {
+        for (int i = this.size = 0; i < to; ++i) {
             es[i] = null;
         }
     }
 
-    @Override
     public E set(int index, E element) {
         Objects.checkIndex(index, this.size);
         E oldValue = this.elementData(index);
@@ -97,23 +92,21 @@ public class MyList<E> extends AbstractList<E> {
         return oldValue;
     }
 
-    @Override
     public int size() {
         return this.size;
     }
 
-    private Object[] grow(){
+    private Object[] grow() {
         return this.elementData = Arrays.copyOf(this.elementData, (this.size * 3) / 2 + 1);
     }
 
-    private void checkIndex(int index){
-        if (index > this.size || index < 0){
+    private void checkIndex(int index) {
+        if (index > this.size || index < 0) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + this.size);
         }
     }
 
-    @Override
-    public void sort(Comparator<? super  E> c) {
+    public void sort(Comparator<? super E> c) {
         MyQuickSorter.sort(this.elementData, c, 0, size - 1);
     }
 }
