@@ -1,4 +1,4 @@
-package org.aston_intensive;
+package org.aston_intensive.week1;
 
 public class Main {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package org.aston_intensive;
+package org.aston_intensive.week1;
 
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
